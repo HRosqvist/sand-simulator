@@ -2,10 +2,19 @@ let grid
 let sandResolution = 5
 let cols, rows
 let hueValue = 2
+let maxWidth = 800
+let maxHeight = 1200
 
 function setup() {
   let width = floor(windowWidth * 0.9)
   let height = floor(windowHeight * 0.8)
+
+  if (width > maxWidth)
+    width = maxWidth
+
+  if (height > maxHeight)
+    height = maxHeight
+  
   createCanvas(width, height)
   colorMode(HSB, 360, 255, 255)
 
@@ -22,6 +31,10 @@ function setup() {
 
 function draw() {
   background(0)
+
+  if (mouseIsPressed) {
+    releaseSand()
+  }
 
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
