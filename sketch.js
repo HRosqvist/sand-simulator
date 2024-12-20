@@ -1,7 +1,7 @@
 let grid
 let sandResolution = 5
 let cols, rows
-let hueValue = 200
+let hueValue = 2
 
 function setup() {
   let width = floor(windowWidth * 0.9)
@@ -72,7 +72,7 @@ function draw() {
   grid = nextGrid
 }
 
-function mouseDragged() {
+function releaseSand() {
   let mouseCol = floor(mouseX / sandResolution)
   let mouseRow = floor(mouseY / sandResolution)
 
@@ -93,39 +93,15 @@ function mouseDragged() {
     }
   }
 
-  hueValue += 1
-
-  if (hueValue == 360) {
-    hueValue = 1
-  }
+  hueValue = hueValue <= 360 ? hueValue + 0.15 : 1
 }
 
-function mouseIsPressed() {
-  let mouseCol = floor(mouseX / sandResolution)
-  let mouseRow = floor(mouseY / sandResolution)
+function mouseDragged() {
+  releaseSand()
+}
 
-  let matrix = 3
-  let extent = floor(matrix / 2)
-
-  for (let i = -extent; i <= extent; i++) {
-    for (let j = -extent; j <= extent; j++) {
-
-      if (random(1) < 0.75) {
-        let col = mouseCol + i
-        let row = mouseRow + j
-
-        if (checkColumnBoundary(col) && checkRowBoundary(row)) {
-          grid[col][row] = hueValue
-        }
-      }
-    }
-  }
-
-  hueValue += 1
-
-  if (hueValue == 360) {
-    hueValue = 1
-  }
+function mousePressed() {
+  releaseSand()
 }
 
 function make2DArray(cols, rows) {
