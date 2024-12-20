@@ -4,11 +4,13 @@ let cols, rows
 let hueValue = 200
 
 function setup() {
-  createCanvas(800, 1200)
+  let width = floor(windowWidth * 0.9)
+  let height = floor(windowHeight * 0.8)
+  createCanvas(width, height)
   colorMode(HSB, 360, 255, 255)
 
-  cols = width / sandResolution
-  rows = height / sandResolution
+  cols = floor(width / sandResolution)
+  rows = floor(height / sandResolution)
   grid = make2DArray(cols, rows)
 
   for (let i = 0; i < cols; i++) {
